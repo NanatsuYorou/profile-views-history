@@ -1,0 +1,10 @@
+.view{
+  &List{
+    margin: 0;
+    padding: 0;
+  }
+  &Item{
+    margin-bottom: 25px;
+    list-style: none;
+  }
+}

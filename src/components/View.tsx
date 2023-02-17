@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import styles from './view.module.scss';
+import React, { FunctionComponent } from 'react';
+import styles from './View.module.scss';
 import clsx from 'clsx';
-
-type employerType = {
-    id: string;
-    name: string;
-    logo_urls: {
-        '90': string;
-    };
-};
-
-type props = {
-    employerJson: string;
-    viewsTimes: string[];
-    viewed: boolean;
-};
-
-function View({ employerJson, viewsTimes, viewed }: props) {
-    const [employer, setEmployer] = useState<employerType>();
-
-    useEffect(() => {
-        setEmployer(JSON.parse(employerJson));
-    }, []);
-
+import { ViewInfo } from '../types/interfaces';
+const View: FunctionComponent<ViewInfo> = ({ viewed, viewTime, employer }) => {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <span className={clsx(viewed && styles.hide, !viewed && styles.new, styles.status)}>Новое</span>
+                <span
+                    className={clsx(styles.status, {
+                        [styles.hidden]: viewed,
+                        [styles.new]: !viewed
+                    })}
+                >
+                    Новое
+                </span>
                 <div className={styles.employerContainer}>
-                    <img src={employer?.logo_urls['90']} alt="" className={styles.employerImg} />
-                    <span className={styles.employerName}>{JSON.parse(employerJson).name}</span>
+                    <img src={employer?.logo['url']} alt="" className={styles.employerImg} />
+                    <span className={styles.employerName}>{employer.name}</span>
                 </div>
             </header>
             <div className={styles.content}>
                 <span className={styles.timeLabel}>Время просмотра</span>
                 <ul className={styles.timeContainer}>
-                    {viewsTimes.map((time) => (
-                        <li key={time} className={styles.time}>
+                    {viewTime.map((time, index) => (
+                        <li key={time + index} className={styles.time}>
                             {time}
                         </li>
                     ))}
@@ -54,6 +41,6 @@ function View({ employerJson, viewsTimes, viewed }: props) {
             </footer>
         </div>
     );
-}
+};
 
 export default View;
