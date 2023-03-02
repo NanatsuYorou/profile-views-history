@@ -1,0 +1,8 @@
+{
+  "port": 3050,
+  "webpack": {
+    "configPath": "react-scripts/config/webpack.config"
+  },
+  "staticPath": "public",
+  "watchDirs": ["src"]
+}

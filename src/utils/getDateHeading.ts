@@ -2,7 +2,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 
 dayjs.locale('ru');
-function dateHeading(date: string): string {
+
+function getDateHeading(date: string): string {
     const formattedDate = dayjs(date);
     const dateNow = dayjs();
     if (formattedDate.year() !== dateNow.year()) {
@@ -20,4 +21,4 @@ function dateHeading(date: string): string {
     return formattedDate.date() === dateNow.date() ? 'Сегодня' : 'Вчера';
 }
 
-export default dateHeading;
+export default getDateHeading;

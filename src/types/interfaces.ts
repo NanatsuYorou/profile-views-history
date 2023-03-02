@@ -8,17 +8,18 @@ export interface ResumeEmployer {
 
 export interface ViewInitialInfo {
     createdAt: string;
-    viewed?: boolean;
+    isViewed?: boolean;
     employer: ResumeEmployer;
 }
-export interface ViewInfo {
+
+export interface CompanyViewInfo {
     employer: ResumeEmployer;
-    viewTime: string[];
-    viewed?: boolean;
+    viewTimeArray: string[];
+    isViewed?: boolean;
 }
 
 export interface ViewMockedInfo {
     date: {
-        employerName: ViewInfo;
+        employerName: CompanyViewInfo;
     };
 }

@@ -61,6 +61,7 @@
     &Name {
         font-size: 20px;
         font-weight: 600;
+        word-break: break-all;
     }
 }
 
@@ -80,6 +81,8 @@
         flex-wrap: wrap;
         padding: 0;
         margin: 10px 0 20px 0;
+        overflow-y: scroll;
+        max-height: 70px;
     }
     &Label {
         color: #747577;
@@ -102,7 +105,7 @@
 @media (min-width: 700px) {
     .container {
         display: grid;
-        height: 265px;
+        min-height: 265px;
         grid-template-columns: 1fr 2fr;
         grid-template-rows: auto auto;
         grid-template-areas:

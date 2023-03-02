@@ -1,28 +1,33 @@
 import React, { FunctionComponent } from 'react';
 import styles from './View.module.scss';
 import clsx from 'clsx';
-import { ViewInfo } from '../types/interfaces';
-const View: FunctionComponent<ViewInfo> = ({ viewed, viewTime, employer }) => {
+import { CompanyViewInfo } from '../types/interfaces';
+
+interface Props {
+    companyViewInfo: CompanyViewInfo;
+}
+
+const View: FunctionComponent<Props> = ({ companyViewInfo }) => {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
                 <span
                     className={clsx(styles.status, {
-                        [styles.hidden]: viewed,
-                        [styles.new]: !viewed
+                        [styles.hidden]: companyViewInfo.isViewed,
+                        [styles.new]: !companyViewInfo.isViewed
                     })}
                 >
                     Новое
                 </span>
                 <div className={styles.employerContainer}>
-                    <img src={employer?.logo['url']} alt="" className={styles.employerImg} />
-                    <span className={styles.employerName}>{employer.name}</span>
+                    <img src={companyViewInfo.employer?.logo['url']} alt="" className={styles.employerImg} />
+                    <span className={styles.employerName}>{companyViewInfo.employer.name}</span>
                 </div>
             </header>
             <div className={styles.content}>
                 <span className={styles.timeLabel}>Время просмотра</span>
                 <ul className={styles.timeContainer}>
-                    {viewTime.map((time, index) => (
+                    {companyViewInfo.viewTimeArray.map((time, index) => (
                         <li key={time + index} className={styles.time}>
                             {time}
                         </li>
@@ -32,7 +37,7 @@ const View: FunctionComponent<ViewInfo> = ({ viewed, viewTime, employer }) => {
             <footer className={styles.footer}>
                 <a
                     rel="noreferrer"
-                    href={'https://hh.ru/employer/' + employer?.id}
+                    href={'https://hh.ru/employer/' + companyViewInfo.employer?.id}
                     target={'_blank'}
                     className={styles.link}
                 >

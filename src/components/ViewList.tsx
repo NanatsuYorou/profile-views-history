@@ -1,16 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import View from './View';
 import styles from './ViewList.module.scss';
-import { ViewInfo } from '../types/interfaces';
-const ViewList: FunctionComponent<ViewInfo[]> = (viewList) => {
-    const employersList = Object.keys(viewList);
+import { CompanyViewInfo } from '../types/interfaces';
+
+interface Props {
+    viewList: CompanyViewInfo[];
+}
+
+const ViewList: FunctionComponent<Props> = (viewList) => {
+    const employerNamesList: string[] = Object.keys(viewList);
 
     return (
         <ul className={styles.viewList}>
-            {employersList.map((employer) => {
+            {employerNamesList.map((employerName) => {
                 return (
-                    <li key={employer} className={styles.viewItem}>
-                        <View {...viewList[employer]} />
+                    <li key={employerName} className={styles.viewItem}>
+                        <View companyViewInfo={viewList[employerName]} />
                     </li>
                 );
             })}

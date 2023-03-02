@@ -2,10 +2,10 @@ import './App.css';
 import History from './pages/History';
 import data from './data/views';
 import { ViewMockedInfo } from './types/interfaces';
-import viewsMock from './ts/viewsMock';
+import mockViews from './utils/mockViews';
 
-function App() {
-    const mockedData: ViewMockedInfo = viewsMock(data);
+const App = () => {
+    const mockedData: ViewMockedInfo = mockViews(data);
     const dateList: string[] = Object.keys(mockedData);
 
     return (
@@ -16,6 +16,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
 export default App;
